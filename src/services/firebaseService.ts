@@ -14,7 +14,6 @@ const firebaseConfig = {
   measurementId: 'G-35R14P3GEV',
 };
 
-
 class FirebaseService {
   public app?: firebase.app.App;
 

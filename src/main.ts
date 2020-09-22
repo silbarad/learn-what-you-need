@@ -17,7 +17,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import App from './App.vue';
 import router from './router';
 
-
 // Bootstrap plugins
 Vue.use(LayoutPlugin);
 Vue.use(ModalPlugin);
