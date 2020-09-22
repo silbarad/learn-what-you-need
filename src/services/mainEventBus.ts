@@ -4,8 +4,6 @@ export const mainEventName = {
   userChanged: 'userChanged',
 };
 
-class MainEventBus extends Vue {
-
-}
+class MainEventBus extends Vue {}
 
 export const mainEventBus = new MainEventBus();
