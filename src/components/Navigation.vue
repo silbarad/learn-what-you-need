@@ -55,7 +55,6 @@ export default class Navigation extends Vue {
     }
   }
 
-  // eslint-disable-next-line  class-methods-use-this
   public async logout() {
     firebaseService.logout();
   }

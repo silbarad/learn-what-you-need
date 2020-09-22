@@ -60,8 +60,8 @@ import { UserAuthenticateSend } from '@/services/models/UserAuthenticateSend';
 import firebaseService from '@/services/firebaseService';
 import { mainEventBus, mainEventName } from '../services/mainEventBus';
 
-const LOGIN_EMAIL_NOTVALID_MESSAGE = 'Email is incorect.';
-const LOGIN_PASSWORD_NOTVALID_MESSAGE = 'Password is incorrecot.';
+const LOGIN_EMAIL_NOTVALID_MESSAGE = 'Email is incorrect.';
+const LOGIN_PASSWORD_NOTVALID_MESSAGE = 'Password is incorrect.';
 
 @Component
 export default class About extends Vue {
