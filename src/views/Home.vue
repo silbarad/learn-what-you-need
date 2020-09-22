@@ -12,7 +12,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Home extends Vue {
-  public get userName() { // eslint-disable-line class-methods-use-this
+  public get userName() {
     return '';
   }
 }
