@@ -1745,16 +1745,16 @@
   optionalDependencies:
     fork-ts-checker-webpack-plugin-v5 "npm:fork-ts-checker-webpack-plugin@^5.0.11"
 
-"@vue/cli-plugin-unit-mocha@~4.3.0":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-unit-mocha/-/cli-plugin-unit-mocha-4.3.1.tgz#174039706a4677402291402daa9610b14d1438ea"
-  integrity sha512-h6MIgnS+H4N3ETeOUbrJ+3p8Ar9f4dZOB/gywe/PvLS/vhCRmyzoIJnTaehSm5cFUCVs7xFt4LLAdaKSbcjW7g==
+"@vue/cli-plugin-unit-mocha@~4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-unit-mocha/-/cli-plugin-unit-mocha-4.5.6.tgz#b5723bb870697509323df526d003a4c6e53f276c"
+  integrity sha512-qaMJgGfjgPA1hVVE6u8ry+hAtvU+fPQAKv5c4nYysLnvxnlLiAgEtK4dIRaH9GZQbA0/HVgRE5C0O7lAOxWapg==
   dependencies:
-    "@vue/cli-shared-utils" "^4.3.1"
+    "@vue/cli-shared-utils" "^4.5.6"
     jsdom "^15.2.1"
     jsdom-global "^3.0.2"
     mocha "^6.2.2"
-    mochapack "^1.1.13"
+    mochapack "^1.1.15"
 
 "@vue/cli-plugin-vuex@^4.5.6":
   version "4.5.6"
@@ -7206,7 +7206,7 @@ mocha@^6.2.2:
     yargs-parser "13.1.2"
     yargs-unparser "1.6.0"
 
-mochapack@^1.1.13:
+mochapack@^1.1.15:
   version "1.1.15"
   resolved "https://registry.yarnpkg.com/mochapack/-/mochapack-1.1.15.tgz#426c793b871ed006c781172da2b15f612f11f2dc"
   integrity sha512-/gOsgJk3CWlNiOdef7hrNhp37VpatB9IiWzSCxS2p8pG21R7NAKJBBsU5T0eUWT9oz1NQhyubXdQgh51U7oVZA==
