@@ -13,7 +13,8 @@
             v-model="model.email"
             placeholder="user@user.pl"
             ref="userName"
-            @keyup.enter="login">
+            @keyup.enter="login"
+          >
           </b-form-input>
         </b-form-group>
       </b-col>
@@ -26,7 +27,8 @@
             id="password"
             v-model="model.password"
             @keyup.enter="login"
-            placeholder="password"></b-form-input>
+            placeholder="password"
+          ></b-form-input>
         </b-form-group>
       </b-col>
     </b-row>
@@ -36,35 +38,46 @@
           type="button"
           class="btn btn-primary"
           :disabled="waitingResponse"
-          @click="login">Login</button>
+          @click="login"
+        >
+          Login
+        </button>
       </b-col>
     </b-row>
     <b-row v-if="waitingResponse" :no-gutters="true" class="pt-3">
       <b-col cols="12" md="8">
-         <b-spinner label="Loading..."></b-spinner>
+        <b-spinner label="Loading..."></b-spinner>
       </b-col>
     </b-row>
     <b-row v-if="message.show" :no-gutters="true" class="pt-3">
       <b-col cols="12" md="8">
-          <b-alert :show="message.show" variant="warning">
-            {{message.content}}
-          </b-alert>
+        <b-alert :show="message.show" variant="warning">
+          {{ message.content }}
+        </b-alert>
       </b-col>
     </b-row>
   </b-container>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { UserAuthenticateSend } from '@/services/models/UserAuthenticateSend';
-
-import firebaseService from '@/services/firebaseService';
-import { mainEventBus, mainEventName } from '../services/mainEventBus';
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import { provide, consume } from 'provide-consume-decorator';
+import { getModule } from 'vuex-module-decorators';
+import NavigationStore from '../Navigation/store/NavigationStore';
+import UserAuthenticateSend from '../Navigation/types/UserAuthenticateSend';
 
 const LOGIN_EMAIL_NOTVALID_MESSAGE = 'Email is incorrect.';
 const LOGIN_PASSWORD_NOTVALID_MESSAGE = 'Password is incorrect.';
 
 @Component
-export default class About extends Vue {
+@provide({
+  // provide a data store
+  navigationStore() {
+    return getModule(NavigationStore, this.$store);
+  },
+})
+export default class Login extends Vue {
+  @consume('navigationStore') ds!: NavigationStore;
+
   public checked = false;
 
   public waitingResponse = false;
@@ -79,20 +92,16 @@ export default class About extends Vue {
     password: '',
   };
 
+  public get isAuthorized() {
+    return this.ds.isAuthorized;
+  }
+
   public mounted() {
     this.$nextTick(() => {
       const userNameInput = this.$refs.userName as HTMLInputElement | undefined;
       if (!userNameInput) return;
       userNameInput.focus();
     });
-  }
-
-  public created() {
-    mainEventBus.$on(mainEventName.userChanged, this.redirectPage);
-  }
-
-  public destroyed() {
-    mainEventBus.$off(mainEventName.userChanged, this.redirectPage);
   }
 
   public async login() {
@@ -110,24 +119,25 @@ export default class About extends Vue {
       this.waitingResponse = false;
       return;
     }
-    this.message.content = await firebaseService.login(this.model);
+    this.message.content = await this.ds.login(this.model);
     if (this.message.content) {
       this.message.show = true;
     } else {
-      this.redirectPage();
+      this.errorAfterTimOut();
     }
     this.waitingResponse = false;
   }
 
-  public redirectPage() {
-    const returnUrl = this.$route.query.returnUrl as string;
-    if (returnUrl) {
-      this.$router.push({
-        path: returnUrl,
-      });
-    } else {
+  public errorAfterTimOut() {
+    // TODO: Add error after timeout
+  }
+
+  @Watch('ds.isAuthorized')
+  public IsAuthorizedWatch(newValue: boolean) {
+    if (newValue) {
       this.$router.push('home');
     }
+    console.log(newValue);
   }
 }
 </script>

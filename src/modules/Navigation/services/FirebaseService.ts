@@ -1,7 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { UserAuthenticateSend } from './models/UserAuthenticateSend';
-import { mainEventBus, mainEventName } from './mainEventBus';
+import { FirebaseCallbackInterface } from '../types/FirebaseCallbackInterface';
+import { FirebaseServiceInterface } from '../types/FirebaseServiceInterface';
+import UserAuthenticateSend from '../types/UserAuthenticateSend';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCxQtV1jMKKvOG0FX3jhsDUHBDYb3rdNm4',
@@ -14,34 +15,28 @@ const firebaseConfig = {
   measurementId: 'G-35R14P3GEV',
 };
 
-class FirebaseService {
-  public app?: firebase.app.App;
+export default class implements FirebaseServiceInterface {
+  private app?: firebase.app.App;
 
-  // eslint-disable-next-line  class-methods-use-this
-  public get userInfo() {
-    return firebase.auth().currentUser;
-  }
+  private callbacks?: FirebaseCallbackInterface;
 
-  constructor() {
+  public async init(navigationStore: FirebaseCallbackInterface) {
+    this.callbacks = navigationStore;
     this.app = firebase.initializeApp(firebaseConfig);
-    firebase.auth().onAuthStateChanged(this.userAuthStateChanged);
+    firebase.auth().onAuthStateChanged(() => this.userAuthStateChanged());
   }
 
-  // eslint-disable-next-line  class-methods-use-this
-  public userAuthStateChanged() {
-    mainEventBus.$emit(mainEventName.userChanged);
+  public async userAuthStateChanged() {
+    console.log('123');
+    await this.callbacks?.userChange();
   }
 
-  // eslint-disable-next-line  class-methods-use-this
   public async login(userAuth: UserAuthenticateSend) {
     const AUTH_NOT_FOUND = 'auth/user-not-found';
     const AUTH_NOT_FOUND_MESSAGE = 'Email or password is wrong.';
     const AUTH_DEFAULT_MESSAGE = 'Something wrong with authentication.';
     try {
-      await firebase
-        .auth()
-        .signInWithEmailAndPassword(userAuth.email, userAuth.password);
-      mainEventBus.$emit(mainEventName.userChanged);
+      await firebase.auth().signInWithEmailAndPassword(userAuth.email, userAuth.password);
       return '';
     } catch (error) {
       const authFirebaseError = error as firebase.auth.Error;
@@ -54,11 +49,8 @@ class FirebaseService {
     }
   }
 
-  // eslint-disable-next-line  class-methods-use-this
   public async logout() {
-    await firebase.auth().signOut();
+    // await firebase.auth().signOut();
+    return Promise.resolve();
   }
 }
-
-const firebaseService = new FirebaseService();
-export default firebaseService;

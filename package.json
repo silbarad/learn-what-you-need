@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve:watch": "vue-cli-service serve --watch",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
@@ -15,14 +16,16 @@
     "bootstrap-vue": "^2.13.1",
     "core-js": "^3.6.4",
     "firebase": "^7.23.0",
+    "provide-consume-decorator": "^1.0.0",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.0.2",
-    "vue-router": "^3.4.6"
+    "vue-router": "^3.4.6",
+    "vuex": "^3.5.1",
+    "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.13",
-    "@types/mocha": "^8.0.3",
+    "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "@vue/cli-plugin-babel": "~4.5.7",
@@ -30,16 +33,16 @@
     "@vue/cli-plugin-eslint": "~4.5.7",
     "@vue/cli-plugin-router": "~4.5.7",
     "@vue/cli-plugin-typescript": "~4.5.7",
-    "@vue/cli-plugin-unit-mocha": "~4.5.7",
+    "@vue/cli-plugin-unit-jest": "^4.5.7",
     "@vue/cli-service": "~4.5.7",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^5.1.0",
     "@vue/test-utils": "1.1.0",
-    "chai": "^4.1.2",
     "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-vue": "^7.0.1",
     "typescript": "~4.0.3",
+    "vue-jest": "^3.0.7",
+    "ts-jest": "^26.4.1",
     "vue-template-compiler": "^2.6.12"
   }
 }

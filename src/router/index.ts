@@ -1,8 +1,10 @@
 import Vue from 'vue';
+import { getModule } from 'vuex-module-decorators';
 import VueRouter, { RouteConfig } from 'vue-router';
-import RoleName from '@/helpers/RoleName';
-import firebaseService from '@/services/firebaseService';
-import Home from '@/views/Home.vue';
+import Home from '../modules/Home/Index.vue';
+import store from '../store/index';
+import NavigationStore from '../modules/Navigation/store/NavigationStore';
+import RoleName from '../helpers/RoleName';
 
 Vue.use(VueRouter);
 
@@ -18,7 +20,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "accountsLogin" */ '@/views/Login.vue'),
+    component: () => import(/* webpackChunkName: "accountsLogin" */ '@/modules/Login/Index.vue'),
     meta: {
       title: 'Login',
       authorize: [],
@@ -35,18 +37,20 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const navigationStore = getModule(NavigationStore, store);
   // redirect to login page if not logged in and trying to access a restricted page
   const { authorize } = to.meta as { authorize?: string[] };
-  const currentUserName = firebaseService.userInfo?.email ?? '';
 
   if (!(!authorize || authorize.length === 0)) {
-    if (!currentUserName) {
+    if (!navigationStore.isAuthorized) {
       // not logged in so redirect to login page with the return url
       return next({ path: '/login?', query: { returnUrl: to.path } });
     }
   }
   const metaTitle = to.meta.title;
-  document.title = metaTitle ? `Learn what you need - Portal - ${metaTitle}` : 'Learn what you need - Portal';
+  document.title = metaTitle
+    ? `Learn what you need - Portal - ${metaTitle}`
+    : 'Learn what you need - Portal';
   return next();
 });
 
