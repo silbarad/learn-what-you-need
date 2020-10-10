@@ -8,15 +8,14 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Navigation from '@/components/Navigation.vue';
+import Navigation from './modules/Navigation/Index.vue';
 
 @Component({
   components: {
     Navigation,
   },
 })
-export default class App extends Vue {
-}
+export default class App extends Vue {}
 </script>
 <style>
 #app {
