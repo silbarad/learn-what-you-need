@@ -20,7 +20,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "accountsLogin" */ '@/modules/Login/Index.vue'),
+    component: () => import(/* webpackChunkName: "accountsLogin" */ '../modules/Login/Index.vue'),
     meta: {
       title: 'Login',
       authorize: [],

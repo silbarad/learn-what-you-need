@@ -6,9 +6,7 @@ module.exports = {
     // process `*.vue` files with `vue-jest`
     '.*\\.(vue)$': 'vue-jest',
   },
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
+  testMatch: ['**/__tests__/unit/*.spec.ts'],
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{ts,vue}', '!**/node_modules/**'],
+  collectCoverageFrom: ['src/**/*.{ts,vue}', '!**/node_modules/**', '!**/__tests__/**'],
 };

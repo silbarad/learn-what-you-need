@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { FirebaseCallbackInterface } from '../types/FirebaseCallbackInterface';
-import { FirebaseServiceInterface } from '../types/FirebaseServiceInterface';
+import { FirebaseCallbackStoreInterface } from '../types/FirebaseCallbackInterface';
+import { FirebaseServiceInterface } from '../types/FirebaseCallbackStoreInterface';
 import UserAuthenticateSend from '../types/UserAuthenticateSend';
 
 const firebaseConfig = {
@@ -19,9 +19,9 @@ const ROLES_USER = 'user';
 export default class implements FirebaseServiceInterface {
   private app?: firebase.app.App;
 
-  private callbacks?: FirebaseCallbackInterface;
+  private callbacks?: FirebaseCallbackStoreInterface;
 
-  public async init(navigationStore: FirebaseCallbackInterface) {
+  public async init(navigationStore: FirebaseCallbackStoreInterface) {
     this.callbacks = navigationStore;
     this.app = firebase.initializeApp(firebaseConfig);
     firebase.auth().onAuthStateChanged((user: firebase.User | null) => {

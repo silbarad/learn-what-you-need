@@ -2,9 +2,9 @@ import { provide, consume } from 'provide-consume-decorator';
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
 import FirebaseService from '../services/FirebaseService';
 
-import { FirebaseServiceInterface } from '../types/FirebaseServiceInterface';
+import { FirebaseServiceInterface } from '../types/FirebaseCallbackStoreInterface';
 import { NavigationStoreInterface } from '../types/NavigationStoreInterface';
-import { FirebaseCallbackInterface } from '../types/FirebaseCallbackInterface';
+import { FirebaseCallbackStoreInterface } from '../types/FirebaseCallbackInterface';
 import UserAuthenticateSend from '../types/UserAuthenticateSend';
 import { UserAuthenticate } from '../types/UserAuthenticate';
 
@@ -19,7 +19,7 @@ const LOGIN_OBJECT_NOT_VALID = 'Login object is not valid.';
   firebase: () => new FirebaseService(),
 })
 export default class extends VuexModule
-  implements NavigationStoreInterface, FirebaseCallbackInterface {
+  implements NavigationStoreInterface, FirebaseCallbackStoreInterface {
   @consume('firebase')
   firebase!: FirebaseServiceInterface;
 
@@ -72,13 +72,13 @@ export default class extends VuexModule
 
   @Action
   async logout() {
-    return this.firebase.logout();
+    await this.firebase.logout();
   }
 
   @Action
   async userChange(user: UserAuthenticate) {
     this.setUserName(user.userName);
     this.setUserRoles(user.userRoles);
-    return Promise.resolve();
+    await Promise.resolve();
   }
 }
