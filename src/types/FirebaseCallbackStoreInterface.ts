@@ -1,8 +1,8 @@
-import { FirebaseCallbackInterface } from './FirebaseCallbackInterface';
+import { FirebaseCallbackStoreInterface } from './FirebaseCallbackInterface';
 import UserAuthenticateSend from './UserAuthenticateSend';
 
 export interface FirebaseServiceInterface {
-  init(navigationStore: FirebaseCallbackInterface): Promise<void>;
+  init(navigationStore: FirebaseCallbackStoreInterface): Promise<void>;
   login(userAuth: UserAuthenticateSend): Promise<string>;
   logout(): Promise<void>;
 }

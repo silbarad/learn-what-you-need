@@ -12,10 +12,14 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'class-methods-use-this': 'off',
     'object-curly-newline': 'off',
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
+    'max-classes-per-file': 'off',
   },
   overrides: [
     {
-      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+      // files: ['**/__tests__/unit/*.ts', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+      files: ['**/__tests__/unit/*.ts'],
       env: {
         jest: true,
       },

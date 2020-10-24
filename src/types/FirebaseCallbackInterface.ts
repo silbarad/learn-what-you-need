@@ -1,5 +1,5 @@
 import { UserAuthenticate } from './UserAuthenticate';
 
-export interface FirebaseCallbackInterface {
+export interface FirebaseCallbackStoreInterface {
   userChange(user: UserAuthenticate): Promise<void>;
 }

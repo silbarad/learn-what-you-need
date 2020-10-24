@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "lib": [
       "esnext",
@@ -23,16 +23,18 @@
     "types": [
       "webpack-env",
       "jest"
-    ]
+    ],
+    "paths": {
+      "tu/*": [
+        "./tests/unit/*"
+      ],
+    }
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
   ],
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src/**/*",
+    "tests/**/*",
   ]
 }
