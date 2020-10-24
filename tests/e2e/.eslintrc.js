@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: ['cypress'],
   rules: {
-    strict: 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'no-unused-expressions': 'off',
   },
 };
