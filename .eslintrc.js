@@ -15,6 +15,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'max-classes-per-file': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   overrides: [
     {
