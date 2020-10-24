@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import NavigationStore from '../modules/Navigation/store/NavigationStore';
+import NavigationStore from './NavigationStore';
 
 Vue.use(Vuex);
 
