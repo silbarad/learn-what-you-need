@@ -14,6 +14,7 @@ const firebaseConfig = {
   appId: '1:17350185799:web:42928ab118810fe112f262',
   measurementId: 'G-35R14P3GEV',
 };
+const ROLES_USER = 'user';
 
 export default class implements FirebaseServiceInterface {
   private app?: firebase.app.App;
@@ -23,12 +24,20 @@ export default class implements FirebaseServiceInterface {
   public async init(navigationStore: FirebaseCallbackInterface) {
     this.callbacks = navigationStore;
     this.app = firebase.initializeApp(firebaseConfig);
-    firebase.auth().onAuthStateChanged(() => this.userAuthStateChanged());
+    firebase.auth().onAuthStateChanged((user: firebase.User | null) => {
+      if (user) {
+        this.userAuthStateChanged(user.displayName || '', [ROLES_USER]);
+      } else {
+        this.userAuthStateChanged('', []);
+      }
+    });
   }
 
-  public async userAuthStateChanged() {
-    console.log('123');
-    await this.callbacks?.userChange();
+  public async userAuthStateChanged(userName?: string, userRoles?: string[]) {
+    await this.callbacks?.userChange({
+      userName: userName || '',
+      userRoles: userRoles || [],
+    });
   }
 
   public async login(userAuth: UserAuthenticateSend) {
@@ -50,7 +59,7 @@ export default class implements FirebaseServiceInterface {
   }
 
   public async logout() {
-    // await firebase.auth().signOut();
-    return Promise.resolve();
+    await firebase.auth().signOut();
+    this.userAuthStateChanged('', []);
   }
 }

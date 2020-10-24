@@ -2,8 +2,8 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../modules/Home/Index.vue';
-import store from '../store/index';
-import NavigationStore from '../modules/Navigation/store/NavigationStore';
+import store from '../stores/index';
+import NavigationStore from '../stores/NavigationStore';
 import RoleName from '../helpers/RoleName';
 
 Vue.use(VueRouter);
@@ -42,7 +42,7 @@ router.beforeEach((to, from, next) => {
   const { authorize } = to.meta as { authorize?: string[] };
 
   if (!(!authorize || authorize.length === 0)) {
-    if (!navigationStore.isAuthorized) {
+    if (!navigationStore.getIsAuthorized) {
       // not logged in so redirect to login page with the return url
       return next({ path: '/login?', query: { returnUrl: to.path } });
     }

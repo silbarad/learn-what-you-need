@@ -59,11 +59,11 @@
   </b-container>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
-import NavigationStore from '../Navigation/store/NavigationStore';
-import UserAuthenticateSend from '../Navigation/types/UserAuthenticateSend';
+import NavigationStore from '../../stores/NavigationStore';
+import UserAuthenticateSend from '../../types/UserAuthenticateSend';
 
 const LOGIN_EMAIL_NOTVALID_MESSAGE = 'Email is incorrect.';
 const LOGIN_PASSWORD_NOTVALID_MESSAGE = 'Password is incorrect.';
@@ -93,7 +93,7 @@ export default class Login extends Vue {
   };
 
   public get isAuthorized() {
-    return this.ds.isAuthorized;
+    return this.ds.getIsAuthorized;
   }
 
   public mounted() {
@@ -130,14 +130,6 @@ export default class Login extends Vue {
 
   public errorAfterTimOut() {
     // TODO: Add error after timeout
-  }
-
-  @Watch('ds.isAuthorized')
-  public IsAuthorizedWatch(newValue: boolean) {
-    if (newValue) {
-      this.$router.push('home');
-    }
-    console.log(newValue);
   }
 }
 </script>

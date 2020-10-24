@@ -6,6 +6,7 @@ import { FirebaseServiceInterface } from '../types/FirebaseServiceInterface';
 import { NavigationStoreInterface } from '../types/NavigationStoreInterface';
 import { FirebaseCallbackInterface } from '../types/FirebaseCallbackInterface';
 import UserAuthenticateSend from '../types/UserAuthenticateSend';
+import { UserAuthenticate } from '../types/UserAuthenticate';
 
 const LOGIN_OBJECT_NOT_VALID = 'Login object is not valid.';
 
@@ -28,13 +29,24 @@ export default class extends VuexModule
 
   userRoles = [] as string[];
 
-  get isAuthorized() {
+  // GETTERS
+  get getIsAuthorized() {
     return this.userRoles.length > 0;
   }
 
+  get getUserName() {
+    return this.userName;
+  }
+
+  // MUTATION
   @Mutation
-  setRoles(roles: string[]) {
+  setUserRoles(roles: string[]) {
     this.userRoles = roles;
+  }
+
+  @Mutation
+  setUserName(userName: string) {
+    this.userName = userName;
   }
 
   @Mutation
@@ -59,8 +71,14 @@ export default class extends VuexModule
   }
 
   @Action
-  async userChange() {
-    this.setRoles(['admin']);
+  async logout() {
+    return this.firebase.logout();
+  }
+
+  @Action
+  async userChange(user: UserAuthenticate) {
+    this.setUserName(user.userName);
+    this.setUserRoles(user.userRoles);
     return Promise.resolve();
   }
 }

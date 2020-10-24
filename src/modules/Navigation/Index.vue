@@ -2,7 +2,7 @@
   <b-navbar toggleable="lg" type="dark" variant="dark">
     <b-navbar-brand to="/">Learn what you need</b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-    <b-collapse id="nav-collapse" is-nav v-if="roleUser">
+    <b-collapse id="nav-collapse" is-nav v-if="isAuthorized">
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown right>
@@ -17,12 +17,11 @@
   </b-navbar>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { BIconPerson } from 'bootstrap-vue';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
-// import RoleName from '../../helpers/RoleName';
-import NavigationStore from './store/NavigationStore';
+import NavigationStore from '../../stores/NavigationStore';
 
 @Component({
   components: {
@@ -38,34 +37,25 @@ import NavigationStore from './store/NavigationStore';
 export default class Navigation extends Vue {
   @consume('navigationStore') ds!: NavigationStore;
 
-  public get roleUser() {
-    if (!this.ds) {
-      return false;
-    }
-    // return this.ds.userRoles.includes(RoleName.User);
-    return false;
+  public get isAuthorized() {
+    return this.ds.getIsAuthorized;
   }
 
   public async created() {
     await this.ds.init();
   }
 
-  public destroyed() {
-    // mainEventBus.$off(mainEventName.userChanged, this.userChanged);
-  }
-
-  public userChanged() {
-    // this.userName = firebaseService.userInfo?.email ?? '';
-    // this.roles = [];
-    // if (this.userName.length > 0) {
-    //   this.roles.push(RoleName.User);
-    // } else {
-    //   this.$router.push('login');
-    // }
-  }
-
   public async logout() {
-    // firebaseService.logout();
+    this.ds.logout();
+  }
+
+  @Watch('ds.getIsAuthorized')
+  public IsAuthorizedWatch(newValue: boolean) {
+    if (newValue) {
+      this.$router.push('home');
+    } else {
+      this.$router.push('login');
+    }
   }
 }
 </script>
