@@ -64,6 +64,7 @@ import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
 import NavigationStore from '@/stores/NavigationStore';
 import UserAuthenticateSend from '@/types/UserAuthenticateSend';
+import LoginProps from '@/modules/Login/types/LoginProps';
 
 const LOGIN_EMAIL_NOTVALID_MESSAGE = 'Email is incorrect.';
 const LOGIN_PASSWORD_NOTVALID_MESSAGE = 'Password is incorrect.';
@@ -71,11 +72,12 @@ const LOGIN_PASSWORD_NOTVALID_MESSAGE = 'Password is incorrect.';
 @Component
 @provide({
   // provide a data store
+  /* istanbul ignore next */
   navigationStore() {
     return getModule(NavigationStore, this.$store);
   },
 })
-export default class Login extends Vue {
+export default class Login extends Vue implements LoginProps {
   @consume('navigationStore') ds!: NavigationStore;
 
   public checked = false;
@@ -99,7 +101,10 @@ export default class Login extends Vue {
   public mounted() {
     this.$nextTick(() => {
       const userNameInput = this.$refs.userName as HTMLInputElement | undefined;
-      if (!userNameInput) return;
+      /* istanbul ignore if  */
+      if (!userNameInput) {
+        return;
+      }
       userNameInput.focus();
     });
   }
@@ -107,7 +112,7 @@ export default class Login extends Vue {
   public async login() {
     this.message.show = false;
     this.waitingResponse = true;
-    if (this.model.email.length < 4) {
+    if (this.model.email.length < 4 || !this.model.email.includes('@')) {
       this.message.content = LOGIN_EMAIL_NOTVALID_MESSAGE;
       this.message.show = true;
       this.waitingResponse = false;

@@ -2,7 +2,7 @@ import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 import Home from '@/modules/Home/Index.vue';
 import factory from './__factory';
 import FirebaseMock from '@/services/__tests__/firebase.mock';
-import HomeProps from '../types/HomeProps';
+import HomeProps from '@/modules/Home/types/HomeProps';
 
 const firebaseMock = new FirebaseMock();
 

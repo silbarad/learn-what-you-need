@@ -67,7 +67,8 @@ export default class extends VuexModule
     if (!userAuth) {
       return LOGIN_OBJECT_NOT_VALID;
     }
-    return this.firebase.login(userAuth);
+    const message = await this.firebase.login(userAuth);
+    return message;
   }
 
   @Action
