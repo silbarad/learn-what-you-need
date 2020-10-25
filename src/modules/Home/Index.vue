@@ -12,6 +12,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
 import NavigationStore from '@/stores/NavigationStore';
+import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 import HomeProps from './types/HomeProps';
 
 @Component
@@ -22,7 +23,7 @@ import HomeProps from './types/HomeProps';
   },
 })
 export default class Home extends Vue implements HomeProps {
-  @consume('navigationStore') ds!: NavigationStore;
+  @consume('navigationStore') ds!: NavigationStoreInterface;
 
   public get userName() {
     return this.ds.getUserName;
