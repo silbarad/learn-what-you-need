@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../modules/Home/Index.vue';
-import store from '../stores/index';
-import NavigationStore from '../stores/NavigationStore';
-import RoleName from '../helpers/RoleName';
+import Home from '@/modules/Home/Index.vue';
+import store from '@/stores/index';
+import NavigationStore from '@/stores/NavigationStore';
+import RoleName from '@/helpers/RoleName';
 
 Vue.use(VueRouter);
 
@@ -20,7 +20,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "accountsLogin" */ '../modules/Login/Index.vue'),
+    component: () => import(/* webpackChunkName: "accountsLogin" */ '@/modules/Login/Index.vue'),
     meta: {
       title: 'Login',
       authorize: [],

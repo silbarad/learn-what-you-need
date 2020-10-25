@@ -1,12 +1,12 @@
 import { provide, consume } from 'provide-consume-decorator';
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
-import FirebaseService from '../services/FirebaseService';
+import FirebaseService from '@/services/firebase.service';
 
-import { FirebaseServiceInterface } from '../types/FirebaseCallbackStoreInterface';
-import { NavigationStoreInterface } from '../types/NavigationStoreInterface';
-import { FirebaseCallbackStoreInterface } from '../types/FirebaseCallbackInterface';
-import UserAuthenticateSend from '../types/UserAuthenticateSend';
-import { UserAuthenticate } from '../types/UserAuthenticate';
+import { FirebaseServiceInterface } from '@/types/FirebaseCallbackStoreInterface';
+import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
+import { FirebaseCallbackStoreInterface } from '@/types/FirebaseCallbackInterface';
+import UserAuthenticateSend from '@/types/UserAuthenticateSend';
+import { UserAuthenticate } from '@/types/UserAuthenticate';
 
 const LOGIN_OBJECT_NOT_VALID = 'Login object is not valid.';
 

@@ -1,40 +1,38 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "lib": [
-      "esnext",
-      "esnext.asynciterable",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "strict": true,
     "target": "esnext",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
     "types": [
       "webpack-env",
       "jest"
     ],
     "paths": {
-      "tu/*": [
-        "./tests/unit/*"
-      ],
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
   "exclude": [
-    "node_modules",
+    "node_modules"
   ],
   "include": [
     "src/**/*",
-    "tests/**/*",
+    "tests/**/*"
   ]
 }

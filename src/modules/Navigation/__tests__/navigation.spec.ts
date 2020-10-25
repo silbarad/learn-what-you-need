@@ -1,7 +1,7 @@
-import { NavigationStoreInterface } from '../../../../types/NavigationStoreInterface';
-import Navigation from '../../Index.vue';
+import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
+import Navigation from '@/modules/Navigation/Index.vue';
 import factory from './__factory';
-import FirebaseMock from './FirebaseMock';
+import FirebaseMock from '@/services/__tests__/firebase.mock';
 
 const firebaseMock = new FirebaseMock();
 

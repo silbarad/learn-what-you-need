@@ -1,8 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { FirebaseCallbackStoreInterface } from '../types/FirebaseCallbackInterface';
-import { FirebaseServiceInterface } from '../types/FirebaseCallbackStoreInterface';
-import UserAuthenticateSend from '../types/UserAuthenticateSend';
+import { FirebaseCallbackStoreInterface } from '@/types/FirebaseCallbackInterface';
+import { FirebaseServiceInterface } from '@/types/FirebaseCallbackStoreInterface';
+import UserAuthenticateSend from '@/types/UserAuthenticateSend';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCxQtV1jMKKvOG0FX3jhsDUHBDYb3rdNm4',

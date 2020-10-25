@@ -1,6 +1,6 @@
-import { FirebaseCallbackStoreInterface } from '../../../../types/FirebaseCallbackInterface';
-import { FirebaseServiceInterface } from '../../../../types/FirebaseCallbackStoreInterface';
-import UserAuthenticateSend from '../../../../types/UserAuthenticateSend';
+import { FirebaseCallbackStoreInterface } from '@/types/FirebaseCallbackInterface';
+import { FirebaseServiceInterface } from '@/types/FirebaseCallbackStoreInterface';
+import UserAuthenticateSend from '@/types/UserAuthenticateSend';
 
 class FirebaseMock implements FirebaseServiceInterface {
   callback?: FirebaseCallbackStoreInterface;
