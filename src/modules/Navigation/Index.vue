@@ -21,8 +21,8 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import { BIconPerson } from 'bootstrap-vue';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
-import NavigationStore from '../../stores/NavigationStore';
-import { NavigationStoreInterface } from '../../types/NavigationStoreInterface';
+import NavigationStore from '@/stores/NavigationStore';
+import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 
 @Component({
   components: {

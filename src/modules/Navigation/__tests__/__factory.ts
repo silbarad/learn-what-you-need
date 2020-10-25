@@ -3,9 +3,9 @@ import { getModule } from 'vuex-module-decorators';
 import { provideVuex, provide } from 'provide-consume-decorator';
 import { Component, Vue } from 'vue-property-decorator';
 import { mount, VueClass } from '@vue/test-utils';
-import VueInitializer from '../../../../../tests/unit/VueInitializer';
-import NavigationStore from '../../../../stores/NavigationStore';
-import FirebaseMock from './FirebaseMock';
+import NavigationStore from '@/stores/NavigationStore';
+import FirebaseMock from '@/services/__tests__/firebase.mock';
+import VueInitializer from '@/../tests/unit/VueInitializer';
 
 const vi = new VueInitializer();
 

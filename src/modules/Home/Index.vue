@@ -11,7 +11,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
-import NavigationStore from '../../stores/NavigationStore';
+import NavigationStore from '@/stores/NavigationStore';
 import HomeProps from './types/HomeProps';
 
 @Component
