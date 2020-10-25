@@ -18,6 +18,7 @@ import HomeProps from './types/HomeProps';
 @Component
 @provide({
   // provide a data store
+  /* istanbul ignore next */
   navigationStore() {
     return getModule(NavigationStore, this.$store);
   },

@@ -31,6 +31,7 @@ import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 })
 @provide({
   // provide a data store
+  /* istanbul ignore next */
   navigationStore() {
     return getModule(NavigationStore, this.$store);
   },

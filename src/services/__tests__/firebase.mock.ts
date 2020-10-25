@@ -14,6 +14,8 @@ class FirebaseMock implements FirebaseServiceInterface {
     const { callback } = this;
     if (callback) {
       callback.userChange({ userName: userAuth.email, userRoles: ['user'] });
+    } else {
+      console.error('Navigation/Index.vue is not connected');
     }
     return Promise.resolve('');
   }
@@ -22,6 +24,8 @@ class FirebaseMock implements FirebaseServiceInterface {
     const { callback } = this;
     if (callback) {
       callback.userChange({ userName: '', userRoles: [] });
+    } else {
+      console.error('Navigation/Index.vue is not connected');
     }
     return Promise.resolve();
   }
