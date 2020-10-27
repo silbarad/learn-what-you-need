@@ -15,7 +15,7 @@
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.18.1",
     "core-js": "^3.6.5",
-    "firebase": "^7.24.0",
+    "firebase": "^8.0.0",
     "provide-consume-decorator": "^1.0.0",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.6",
