@@ -2,14 +2,13 @@
   <b-container>
     <b-row>
       <b-col cols="12" class="p-2 text-center">
-        <h1>Desk - {{ deskName }}</h1>
+        <h1>Desk edit - {{ deskName }}</h1>
       </b-col>
     </b-row>
     <b-row>
       <b-col cols="12" class="p-2 text-center">
         <div class="d-flex justify-content-around">
-          <b-button class="w-25" @click="() => navigateLearn()">Learn</b-button>
-          <b-button class="w-25" @click="() => navigateEdit()">Edit</b-button>
+          <b-button class="w-25" @click="() => navigateBack()">Back</b-button>
         </div>
       </b-col>
     </b-row>
@@ -49,13 +48,8 @@ export default class Desk extends Vue {
   }
 
   // Event
-  public navigateLearn() {
-    // TODO: Implement learn
-    this.$bvModal.msgBoxOk('Learn in not implement yet');
-  }
-
-  public navigateEdit() {
-    const urlEdit = `/desk/${this.deskUrl}/edit`;
+  public navigateBack() {
+    const urlEdit = `/desk/${this.deskUrl}`;
     this.$router.push(urlEdit);
   }
 
