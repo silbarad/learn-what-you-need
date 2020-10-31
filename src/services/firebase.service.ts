@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { FirebaseCallbackStoreInterface } from '@/types/FirebaseCallbackInterface';
-import { FirebaseServiceInterface } from '@/types/FirebaseCallbackStoreInterface';
+import { FirebaseService } from '@/services/interface/FirebaseService';
 import UserAuthenticateSend from '@/types/UserAuthenticateSend';
 
 const firebaseConfig = {
@@ -16,7 +16,7 @@ const firebaseConfig = {
 };
 const ROLES_USER = 'user';
 
-export default class implements FirebaseServiceInterface {
+export default class implements FirebaseService {
   private app?: firebase.app.App;
 
   private callbacks?: FirebaseCallbackStoreInterface;

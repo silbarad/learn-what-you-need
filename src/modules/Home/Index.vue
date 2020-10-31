@@ -4,6 +4,12 @@
       <h1 class="display-4">Learn what you need</h1>
       <p class="lead">Welcome: {{ userName }}</p>
     </b-jumbotron>
+    <b-row v-for="desk in desks" :key="desk.id" class="m-1 border">
+      <b-col cols="8" class="p-2 text-left">{{ desk.name }}</b-col>
+      <b-col cols="4" class="p-2 text-right">
+        <b-button @click="showCards(desk.id)">Show cards</b-button>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -12,7 +18,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
 import NavigationStore from '@/stores/NavigationStore';
-import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
+import FilestoreStore from '@/stores/FilestoreStore';
 import HomeProps from './types/HomeProps';
 
 @Component
@@ -22,12 +28,30 @@ import HomeProps from './types/HomeProps';
   navigationStore() {
     return getModule(NavigationStore, this.$store);
   },
+  /* istanbul ignore next */
+  filestoreStore() {
+    return getModule(FilestoreStore, this.$store);
+  },
 })
 export default class Home extends Vue implements HomeProps {
-  @consume('navigationStore') ds!: NavigationStoreInterface;
+  @consume('navigationStore') ds!: NavigationStore;
+
+  @consume('filestoreStore') fbs!: FilestoreStore;
 
   public get userName() {
     return this.ds.getUserName;
+  }
+
+  public get desks() {
+    return this.fbs.getDesks;
+  }
+
+  public async created() {
+    await this.fbs.takeDesks();
+  }
+
+  public showCards(id: string) {
+    console.log(id);
   }
 }
 </script>

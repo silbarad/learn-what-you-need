@@ -1,8 +1,8 @@
-import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
+import NavigationStore from '@/stores/NavigationStore';
 import UserAuthenticateSend from '@/types/UserAuthenticateSend';
 
 interface LoginProps {
-  ds?: NavigationStoreInterface;
+  ds?: NavigationStore;
   isAuthorized: boolean;
   model: UserAuthenticateSend;
   login(): Promise<void>;
