@@ -1,7 +1,7 @@
-import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 import Navigation from '@/modules/Navigation/Index.vue';
-import factory from './__factory';
 import FirebaseMock from '@/services/__tests__/firebase.mock';
+import NavigationStore from '@/stores/NavigationStore';
+import factory from './__factory';
 
 const firebaseMock = new FirebaseMock();
 
@@ -15,7 +15,7 @@ describe('modules/Navigation/Index.vue', () => {
     const wrap = createComponent();
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     const vm = wrap.vm as any;
-    const ds = vm.ds as NavigationStoreInterface;
+    const ds = vm.ds as NavigationStore;
 
     expect(wrap.vm).toBeInstanceOf(Object);
     expect(ds.getIsAuthorized).toBeFalsy();
@@ -24,7 +24,7 @@ describe('modules/Navigation/Index.vue', () => {
     const wrap = createComponent();
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     const vm = wrap.vm as any;
-    const ds = vm.ds as NavigationStoreInterface;
+    const ds = vm.ds as NavigationStore;
     ds.login({ email: '', password: '' });
 
     expect(ds.getIsAuthorized).toBeTruthy();
@@ -33,7 +33,7 @@ describe('modules/Navigation/Index.vue', () => {
     const wrap = createComponent();
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     const vm = wrap.vm as any;
-    const ds = vm.ds as NavigationStoreInterface;
+    const ds = vm.ds as NavigationStore;
     ds.login({ email: '', password: '' });
     await vm.$nextTick();
     vm.logout();

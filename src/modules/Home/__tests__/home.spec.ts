@@ -1,38 +1,52 @@
-import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 import Home from '@/modules/Home/Index.vue';
-import factory from './__factory';
-import FirebaseMock from '@/services/__tests__/firebase.mock';
+import { FirebaseMock, FilestoreMock } from '@/services/__tests__';
 import HomeProps from '@/modules/Home/types/HomeProps';
+import factory from './__factory';
 
 const firebaseMock = new FirebaseMock();
+const filestoreMock = new FilestoreMock();
 
 const createComponent = () => {
-  const component = factory(Home, firebaseMock);
+  const component = factory(Home, firebaseMock, filestoreMock);
   return component;
 };
 
 describe('modules/Home/Index.vue', () => {
-  it('Check is not authorized on start', async () => {
+  it('Check Vue component is created', async () => {
     const wrap = createComponent();
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     const vm = (wrap.vm as any) as HomeProps;
-    const ds = vm.ds;
+    const { ds } = vm;
     await (wrap.vm as any).$nextTick();
 
     expect(wrap.vm).toBeInstanceOf(Object);
     expect(ds?.getIsAuthorized).toBeFalsy();
     expect(vm.userName).toBe('');
   });
-  it('Check is authorized after login', async () => {
-    const userName = 'Test 123';
+  it('Check VueStore NavigationStore exist', async () => {
     const wrap = createComponent();
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     const vm = (wrap.vm as any) as HomeProps;
-    const ds = vm.ds;
-    if (ds) {
-      ds.userChange({ userName: userName, userRoles: ['User'] });
-    }
-    await (wrap.vm as any).$nextTick();
-    expect(ds?.getIsAuthorized).toBeTruthy();
-    expect(vm.userName).toBe(userName);
+    const { ds } = vm;
+    expect(ds).toBeInstanceOf(Object);
   });
+  it('Check VueStore FilestoreStore exist', async () => {
+    const wrap = createComponent();
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+    const vm = (wrap.vm as any) as HomeProps;
+    const { fbs } = vm;
+    expect(fbs).toBeInstanceOf(Object);
+  });
+  // it('Check is authorized after login', async () => {
+  //   const userName = 'Test 123';
+  //   const wrap = createComponent();
+  //   const vm = (wrap.vm as any) as HomeProps;
+  //   const { ds } = vm;
+  //   if (ds) {
+  //     ds.userChange({ userName, userRoles: ['User'] });
+  //   }
+  //   await (wrap.vm as any).$nextTick();
+  //   expect(ds?.getIsAuthorized).toBeTruthy();
+  //   expect(vm.userName).toBe(userName);
+  // });
 });

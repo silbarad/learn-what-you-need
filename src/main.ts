@@ -9,6 +9,7 @@ import {
   AlertPlugin,
   JumbotronPlugin,
   NavbarPlugin,
+  ButtonPlugin,
 } from 'bootstrap-vue';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -28,6 +29,7 @@ Vue.use(SpinnerPlugin);
 Vue.use(AlertPlugin);
 Vue.use(JumbotronPlugin);
 Vue.use(NavbarPlugin);
+Vue.use(ButtonPlugin);
 Vue.config.productionTip = false;
 
 new Vue({

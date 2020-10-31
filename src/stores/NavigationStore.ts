@@ -1,9 +1,8 @@
 import { provide, consume } from 'provide-consume-decorator';
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
-import FirebaseService from '@/services/firebase.service';
+import FirebaseServiceImpl from '@/services/firebase.service';
 
-import { FirebaseServiceInterface } from '@/types/FirebaseCallbackStoreInterface';
-import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
+import { FirebaseService } from '@/services/interface/FirebaseService';
 import { FirebaseCallbackStoreInterface } from '@/types/FirebaseCallbackInterface';
 import UserAuthenticateSend from '@/types/UserAuthenticateSend';
 import { UserAuthenticate } from '@/types/UserAuthenticate';
@@ -16,12 +15,12 @@ const LOGIN_OBJECT_NOT_VALID = 'Login object is not valid.';
   stateFactory: true,
 })
 @provide({
-  firebase: () => new FirebaseService(),
+  /* istanbul ignore next */
+  firebase: () => new FirebaseServiceImpl(),
 })
-export default class extends VuexModule
-  implements NavigationStoreInterface, FirebaseCallbackStoreInterface {
+export default class extends VuexModule implements FirebaseCallbackStoreInterface {
   @consume('firebase')
-  firebase!: FirebaseServiceInterface;
+  firebase!: FirebaseService;
 
   initFirebase = false;
 

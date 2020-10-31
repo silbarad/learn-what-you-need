@@ -1,8 +1,8 @@
 import { FirebaseCallbackStoreInterface } from '@/types/FirebaseCallbackInterface';
-import { FirebaseServiceInterface } from '@/types/FirebaseCallbackStoreInterface';
+import { FirebaseService } from '@/services/interface/FirebaseService';
 import UserAuthenticateSend from '@/types/UserAuthenticateSend';
 
-class FirebaseMock implements FirebaseServiceInterface {
+class FirebaseMock implements FirebaseService {
   callback?: FirebaseCallbackStoreInterface;
 
   init(callback: FirebaseCallbackStoreInterface): Promise<void> {

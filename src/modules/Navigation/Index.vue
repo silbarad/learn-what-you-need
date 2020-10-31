@@ -22,7 +22,6 @@ import { BIconPerson } from 'bootstrap-vue';
 import { provide, consume } from 'provide-consume-decorator';
 import { getModule } from 'vuex-module-decorators';
 import NavigationStore from '@/stores/NavigationStore';
-import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
 
 @Component({
   components: {
@@ -37,7 +36,7 @@ import { NavigationStoreInterface } from '@/types/NavigationStoreInterface';
   },
 })
 export default class Navigation extends Vue {
-  @consume('navigationStore') ds!: NavigationStoreInterface;
+  @consume('navigationStore') ds!: NavigationStore;
 
   public get isAuthorized() {
     return this.ds.getIsAuthorized;
