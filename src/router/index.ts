@@ -26,6 +26,14 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/desk/:url/edit',
+    name: 'DeskEdit',
+    component: () => import(/* webpackChunkName: "desk-edit" */ '@/modules/DeskEdit/DeskEdit.vue'),
+    meta: {
+      authorize: [RoleName.User],
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "accountsLogin" */ '@/modules/Login/Index.vue'),
