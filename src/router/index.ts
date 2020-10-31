@@ -18,6 +18,14 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/desk/:url',
+    name: 'Desk',
+    component: () => import(/* webpackChunkName: "desk" */ '@/modules/Desk/Desk.vue'),
+    meta: {
+      authorize: [RoleName.User],
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "accountsLogin" */ '@/modules/Login/Index.vue'),
