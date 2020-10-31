@@ -5,16 +5,14 @@ import { Desk } from './models/Desk';
 
 export default class implements FilestoreService {
   async getDesks(): Promise<Desk[]> {
-    console.log('Service FileStore');
     const db = firebase.firestore();
     const desksCollection = await db.collectionGroup('desks').get();
     const desks = desksCollection.docs.map((d) => {
       // eslint-disable-next-line
-      const { name } = (d.data() as any) as Desk;
+      const { name, url } = (d.data() as any) as Desk;
       const { id } = d;
-      return { name, id };
+      return { name, id, url };
     });
-    console.log(desks);
     return desks;
   }
 }

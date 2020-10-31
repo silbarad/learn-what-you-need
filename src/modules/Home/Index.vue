@@ -7,7 +7,7 @@
     <b-row v-for="desk in desks" :key="desk.id" class="m-1 border">
       <b-col cols="8" class="p-2 text-left">{{ desk.name }}</b-col>
       <b-col cols="4" class="p-2 text-right">
-        <b-button @click="showCards(desk.id)">Show cards</b-button>
+        <b-button @click="showCards(desk.url)">Show cards</b-button>
       </b-col>
     </b-row>
   </b-container>
@@ -43,15 +43,16 @@ export default class Home extends Vue implements HomeProps {
   }
 
   public get desks() {
-    return this.fbs.getDesks;
+    return this.fbs.Desks;
   }
 
   public async created() {
     await this.fbs.takeDesks();
   }
 
-  public showCards(id: string) {
-    console.log(id);
+  public showCards(url: string) {
+    const newUrl = `desk/${url}`;
+    this.$router.push(newUrl);
   }
 }
 </script>
