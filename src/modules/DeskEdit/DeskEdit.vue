@@ -28,7 +28,7 @@ import FilestoreStore from '@/stores/FilestoreStore';
     return getModule(FilestoreStore, this.$store);
   },
 })
-export default class Desk extends Vue {
+export default class DeskEdit extends Vue {
   @consume('filestoreStore') fbs!: FilestoreStore;
 
   public get deskUrl() {
@@ -43,8 +43,13 @@ export default class Desk extends Vue {
     return this.fbs.DeskNotExist;
   }
 
+  public get deskTypes() {
+    return this.fbs.DeskTypes;
+  }
+
   public async created() {
     await this.fbs.setDeskUrl(this.deskUrl);
+    await this.fbs.takeDeskTypes();
   }
 
   // Event

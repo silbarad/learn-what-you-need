@@ -37,16 +37,4 @@ describe('modules/Home/Index.vue', () => {
     const { fbs } = vm;
     expect(fbs).toBeInstanceOf(Object);
   });
-  // it('Check is authorized after login', async () => {
-  //   const userName = 'Test 123';
-  //   const wrap = createComponent();
-  //   const vm = (wrap.vm as any) as HomeProps;
-  //   const { ds } = vm;
-  //   if (ds) {
-  //     ds.userChange({ userName, userRoles: ['User'] });
-  //   }
-  //   await (wrap.vm as any).$nextTick();
-  //   expect(ds?.getIsAuthorized).toBeTruthy();
-  //   expect(vm.userName).toBe(userName);
-  // });
 });
