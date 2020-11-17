@@ -3,7 +3,13 @@ import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
 import FilestoreServiceImpl from '@/services/filestore.service';
 import { Desk } from '@/services/models/Desk';
 import { FilestoreService } from '@/services/interface/FilestoreService';
+import { DeskType } from '@/services/models/DeskType';
 
+const deskEmpty = {
+  id: '',
+  name: '',
+  url: '',
+} as Desk;
 @Module({
   name: 'filestoreStore',
   namespaced: true,
@@ -19,9 +25,11 @@ export default class extends VuexModule {
 
   deskNotExist = false;
 
-  desk: Desk | undefined = undefined;
+  desk: Desk = deskEmpty;
 
   desks = [] as Desk[];
+
+  deskTypes = [] as DeskType[];
 
   public get Desks() {
     return this.desks;
@@ -29,6 +37,10 @@ export default class extends VuexModule {
 
   public get Desk() {
     return this.desk;
+  }
+
+  public get DeskTypes() {
+    return this.deskTypes;
   }
 
   public get DeskNotExist() {
@@ -47,12 +59,21 @@ export default class extends VuexModule {
 
   @Mutation
   setDesk(desk: Desk) {
-    this.desk = desk;
+    if (this.desk !== desk) {
+      this.desk = desk;
+      this.deskTypes = [];
+    }
   }
 
   @Mutation
   setDeskEmpty() {
-    this.desk = undefined;
+    this.desk = deskEmpty;
+    this.deskTypes = [];
+  }
+
+  @Mutation
+  setDeskTypes(deskTypes: DeskType[]) {
+    this.deskTypes = deskTypes;
   }
 
   @Action
@@ -75,6 +96,16 @@ export default class extends VuexModule {
       this.setDeskEmpty();
       this.setDeskNotExist(true);
     }
-    return Promise.resolve();
+  }
+
+  @Action
+  async takeDeskTypes(): Promise<void> {
+    console.log('--takeDeskTypes--');
+    console.log(this.desk);
+    if (!this.desk) {
+      return;
+    }
+    const deskTypes = await this.filestore.getDeskTypes(this.desk.ref);
+    this.setDeskTypes(deskTypes);
   }
 }
