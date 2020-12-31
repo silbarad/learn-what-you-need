@@ -5,6 +5,7 @@ class FilestoreMock implements FilestoreService {
   getDeskTypes(deskRef: DocRef): Promise<DeskType[]> {
     return Promise.resolve([]);
   }
+
   getDesks(): Promise<Desk[]> {
     return Promise.resolve([]);
   }
