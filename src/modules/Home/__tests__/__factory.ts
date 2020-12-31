@@ -17,7 +17,7 @@ const $router = {
 export default (
   VueComponent: VueClass<Vue>,
   firebaseMock: FirebaseMock,
-  filestoreMock: FilestoreMock
+  filestoreMock: FilestoreMock,
 ) => {
   // store mock
   @provideVuex({

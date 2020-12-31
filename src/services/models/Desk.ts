@@ -1,4 +1,4 @@
-import { DocRef } from '.';
+import { DocRef } from './DocRef';
 
 export interface Desk {
   id: string;

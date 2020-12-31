@@ -1,7 +1,7 @@
 import { FilestoreMock } from '@/services/__tests__';
+import DeskVue from '@/modules/Desk/Desk.vue';
 import factory from './__factory';
 import deskProp from '../types/deskProp';
-import DeskVue from '@/modules/Desk/Desk.vue';
 
 const filestoreMock = new FilestoreMock();
 
