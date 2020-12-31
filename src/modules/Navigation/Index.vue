@@ -54,7 +54,11 @@ export default class Navigation extends Vue {
   public IsAuthorizedWatch(newValue: boolean) {
     if (newValue) {
       if (this.$route && this.$route.name === 'Login') {
-        this.$router.push(this.$route.query.returnUrl as string);
+        if (this.$route.query.returnUrl) {
+          this.$router.push(this.$route.query.returnUrl as string);
+        } else {
+          this.$router.push('home');
+        }
       } else {
         this.$router.push('home');
       }

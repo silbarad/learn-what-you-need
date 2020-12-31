@@ -17,7 +17,6 @@ export default class implements FilestoreService {
   }
 
   async getDeskTypes(deskRef: DocRef): Promise<DeskType[]> {
-    console.log(deskRef);
     const db = firebase.firestore();
     const desksCollection = await db
       .collection('types')
@@ -31,7 +30,6 @@ export default class implements FilestoreService {
       const { id } = d;
       return { name, id } as DeskType;
     });
-    console.log(deskTypes);
     return deskTypes;
   }
 }

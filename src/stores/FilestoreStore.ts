@@ -100,8 +100,6 @@ export default class extends VuexModule {
 
   @Action
   async takeDeskTypes(): Promise<void> {
-    console.log('--takeDeskTypes--');
-    console.log(this.desk);
     if (!this.desk) {
       return;
     }
